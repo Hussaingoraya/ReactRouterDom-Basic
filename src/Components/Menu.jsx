@@ -1,8 +1,13 @@
 import React from "react";
 import { products } from "../Data/ProductsDetail";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function Menu() {
+  // navigate hook
+  let navigate = useNavigate()
+  const handleOnClick = (pid) =>{
+    navigate("/products/" + pid)
+  }
   return (
     <div className="container my-5">
       <div className="row">
@@ -16,11 +21,27 @@ export default function Menu() {
                   PRICE: RS
                   {" " + item.price}
                 </p>
-                <Link to={`/products/${item.id}`}>View Details</Link>              </div>
+                <Link to={`/products/${item.id}`}>View Details</Link>{" "}
+              </div>
             </div>
+            <button type="button" class="btn btn-primary mx-2" onClick={()=>handleOnClick(item.id)}>
+        Add to cart
+      </button>
           </div>
         ))}
       </div>
+      
+      {/* <div className="my-5">
+     
+      <button type="button" class="btn btn-secondary">
+        2nd Card
+      </button>
+      <button type="button" class="btn btn-success mx-2">
+        3rd Card
+      </button>
+
+      </div> */}
+     
     </div>
   );
 }
